@@ -6,7 +6,7 @@ export const mailService = {
   save,
   remove,
   getById,
-  createMail: createMail,
+  createMail,
 };
 
 const STORAGE_KEY = "mails";
@@ -22,23 +22,21 @@ const defaultMail = {
   from: "momo@momo.com",
   to: "user@appsus.com",
 };
-
 _createMails();
 
 async function query(filterBy) {
-  const mails = await storageService.query(STORAGE_KEY);
-  if (filterBy) {
-    var { type, maxBatteryStatus, minBatteryStatus, model } = filterBy;
-    maxBatteryStatus = maxBatteryStatus || Infinity;
-    minBatteryStatus = minBatteryStatus || 0;
-    mails = mails.filter(
-      (mail) =>
-        mail.type.toLowerCase().includes(type.toLowerCase()) &&
-        mail.model.toLowerCase().includes(model.toLowerCase()) &&
-        mail.batteryStatus < maxBatteryStatus &&
-        mail.batteryStatus > minBatteryStatus
-    );
+  console.log(filterBy);
+  let mails = await storageService.query(STORAGE_KEY);
+  if (filterBy.textSearch) {
+    console.log(filterBy.textSearch);
   }
+  var { isRead } = filterBy;
+  if (isRead !== null) {
+    console.log(isRead);
+    mails = mails.filter((mail) => mail.isRead === isRead);
+  }
+
+  console.log(mails);
   return mails;
 }
 
@@ -70,6 +68,7 @@ function createMail(
   from = "momo@momo.com",
   to = "user@appsus.com"
 ) {
+  // isRead =!isRead
   return {
     id,
     subject,

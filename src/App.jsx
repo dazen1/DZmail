@@ -2,7 +2,7 @@ import {Route , HashRouter as Router, Routes} from 'react-router-dom'
 
 import { Home } from './pages/Home';
 import { MailIndex } from './pages/MailIndex';
-import { MainHeader } from './cmps/MainHeader';
+import { MainHeader } from './cmps/ui_cmps/MainHeader';
 import { About } from './pages/About';
 import { MailDetails } from './pages/MailDetails';
 

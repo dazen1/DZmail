@@ -95,3 +95,11 @@
 .table-date{
     display: inline-block;
 }
+
+/* mail preview css */
+.read{
+    background-color: rgba(231, 248, 250, 0.85);
+}
+.un-read{
+    background-color: #5c62dc38;
+}

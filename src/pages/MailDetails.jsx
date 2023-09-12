@@ -17,6 +17,7 @@ export function MailDetails() {
     }
   },[mailId])
   
+  console.log('')
   
   async function loadMail(){
     try{

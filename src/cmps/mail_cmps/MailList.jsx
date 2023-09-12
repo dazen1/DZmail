@@ -18,7 +18,8 @@ export function MailList({mails,onDeleteMail}) {
                 <div className='col-title wide'>content</div>
                 <div className='col-title narrow'>date</div>
             </div>
-        <ul className='table'>
+            {/* change class */}
+        <ul className='table'> 
             {mails.map(mail=>
                 <li key={mail.id} className='li-row'>
                     <div className="actions">

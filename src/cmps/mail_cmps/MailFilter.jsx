@@ -1,19 +1,57 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function MailFilter({filter , onChangeFilter }) {
-  
-    console.log(filter)
-  
-    return (
-    <form onChange={(ev)=>console.log(ev)}>
-        <label htmlFor="search">Search</label>
-        <input type="search" id="search" placeholder="Search"/>
-        <label htmlFor="read">Read</label>
-        <input type="radio" id="read" name="isRead"/>
-        <label htmlFor="unread">Unread</label>
-        <input type="radio" id="unread" name="isRead"/>
-        <label htmlFor="all">all</label>
-        <input type="radio" id="all" name="isRead"/>
+export function MailFilter({ filter, onChangeFilter }) {
+  const [filterByToEdit, setFilterByToEdit] = useState(filter);
+  useEffect(() => {
+    onChangeFilter(filterByToEdit);
+  }, [filterByToEdit]);
+
+  function filterChangeHandler(ev) {
+    // const inputType = ev.target.type
+    // const isReadFilter = ev.target.id
+    let { value, type, id, name } = ev.target;
+    console.log();
+    if (name === "isRead") {
+      value = JSON.parse(value);
+    }
+    console.log(JSON.parse(value));
+    setFilterByToEdit((prevFilter) => ({ ...prevFilter, [name]: value }));
+  }
+  console.log(filterByToEdit);
+  return (
+    <form>
+      <label htmlFor="search">Search</label>
+      <input
+        onChange={filterChangeHandler}
+        type="search"
+        id="search"
+        name="textSearch"
+        placeholder="Search"
+      />
+      <label htmlFor="read">Read</label>
+      <input
+        onChange={filterChangeHandler}
+        type="radio"
+        id="read"
+        name="isRead"
+        value={"true"}
+      />
+      <label htmlFor="unread">Unread</label>
+      <input
+        onChange={filterChangeHandler}
+        type="radio"
+        id="unread"
+        name="isRead"
+        value={"false"}
+      />
+      <label htmlFor="all">all</label>
+      <input
+        onChange={filterChangeHandler}
+        type="radio"
+        id="all"
+        name="isRead"
+        value={"null"}
+      />
     </form>
   );
 }
