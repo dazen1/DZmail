@@ -12,7 +12,6 @@ export function MailFilter({ filter, onChangeFilter }) {
     if (name === "isRead") {
       value = JSON.parse(value);
     }
-    // console.log('jsonParse',JSON.parse(value));
     setFilterByToEdit((prevFilter) => ({ ...prevFilter, [name]: value }));
   }
   // console.log(filterByToEdit);

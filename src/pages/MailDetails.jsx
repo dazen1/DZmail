@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router"
 import { mailService } from "../services/mail.service"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+// import { trashSVG } from "../cmps/mail_cmps/MailList"
+
 
 export function MailDetails() {
   const [mail,setMail] = useState(null)
@@ -43,6 +45,11 @@ export function MailDetails() {
           <p>{mail.body}</p>
         </div>
       </div>
+      {/* <button onClick={onDeleteMail}>
+                            <div className="icon-holder">
+                                {trashSVG}
+                            </div>
+                        </button> */}
       
     </div>
   )
