@@ -27,16 +27,19 @@ _createMails();
 async function query(filterBy) {
   console.log(filterBy);
   let mails = await storageService.query(STORAGE_KEY);
-  if (filterBy.textSearch) {
-    console.log(filterBy.textSearch);
+  let { isRead,textSearch } = filterBy;
+  if (textSearch){
+    // console.log(mails[0].body.toLowerCase().includes(textSearch.trim()))
+    mails = mails.filter((mail)=>(
+      mail.body.toLowerCase().includes(textSearch.trim()) ||
+      mail.subject.toLowerCase().includes(textSearch.trim())
+      ))
   }
-  var { isRead } = filterBy;
   if (isRead !== null) {
-    console.log(isRead);
+    // console.log(isRead);
     mails = mails.filter((mail) => mail.isRead === isRead);
   }
-
-  console.log(mails);
+  // console.log(mails);
   return mails;
 }
 
@@ -68,7 +71,10 @@ function createMail(
   from = "momo@momo.com",
   to = "user@appsus.com"
 ) {
-  // isRead =!isRead
+
+  body = generateRandomSentence(15)
+  subject = generateRandomSentence(5)
+
   return {
     id,
     subject,
@@ -92,3 +98,23 @@ function _createMails() {
     utilService.saveToStorage(STORAGE_KEY, mails);
   }
 }
+
+function generateRandomSentence(n) {
+  const words = [
+    'Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur',
+    'adipiscing', 'elit', 'sed', 'do', 'eiusmod', 'tempor',
+    'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua'
+  ];
+
+  const sentenceLength = Math.max(1, n); // Ensure a minimum sentence length of 1
+  const sentence = [];
+
+  for (let i = 0; i < sentenceLength; i++) {
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+    sentence.push(randomWord);
+  }
+
+  return sentence.join(' ');
+}
+
+

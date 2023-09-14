@@ -7,17 +7,15 @@ export function MailFilter({ filter, onChangeFilter }) {
   }, [filterByToEdit]);
 
   function filterChangeHandler(ev) {
-    // const inputType = ev.target.type
-    // const isReadFilter = ev.target.id
     let { value, type, id, name } = ev.target;
-    console.log();
+    console.log(value);
     if (name === "isRead") {
       value = JSON.parse(value);
     }
-    console.log(JSON.parse(value));
+    // console.log('jsonParse',JSON.parse(value));
     setFilterByToEdit((prevFilter) => ({ ...prevFilter, [name]: value }));
   }
-  console.log(filterByToEdit);
+  // console.log(filterByToEdit);
   return (
     <form>
       <label htmlFor="search">Search</label>

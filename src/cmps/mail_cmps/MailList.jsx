@@ -7,7 +7,7 @@ const trashSVG = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="
 
 
 export function MailList({mails,onDeleteMail}) {
-  console.log('from MailList' ,mails);
+//   console.log('from MailList' ,mails);
     
   return (
     <div>
